@@ -26,6 +26,30 @@ app.use(cookieParser());
 
 // Routes for Api
 app.use('/',route);
+import {greeting} from '../controllers/greet.js'
+import {loginToSpotifyAccount, callbackAfterLogin, fetchPlaylist, playlistService, streamAudioFunction} from '../controllers/operations.js'
+
+const router = express.Router();
+
+
+app.get('/',greeting);
+
+// login
+app.get('/api/login', loginToSpotifyAccount);
+
+// callback
+app.get('/api/callback', callbackAfterLogin);
+
+// to get playlists (name and id)
+app.get('/api/playlists', fetchPlaylist);
+
+// to get tracks from a specific playlist (name, artist, genre, download link)
+app.get('/api/playlists/:playlistId', playlistService);
+
+// to stream audio from youtube
+app.get('/api/stream_audio/:video_id/:trackName/:artistName/:trackGenre', streamAudioFunction);
+
+
 
 // Start server
 app.listen(port, () => {
