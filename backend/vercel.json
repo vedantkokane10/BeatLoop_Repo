@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "name": "BeatLoop-api",
+  "builds": [
+    {
+      "src": "server.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    { "src": "/api/(.*)", "dest": "server.js" }  // Matches all routes under /api
+  ]
+}
